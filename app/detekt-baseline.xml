@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:HookEntry.kt$HookEntry$fun customizeMenu( menu: Menu, context: Context?, prefs: YukiHookPrefsBridge, )</ID>
+    <ID>EmptyCatchBlock:HookEntry.kt$HookEntry${ }</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun AddItemDialog( onDismiss: () -&gt; Unit, onAdd: (String, String, Boolean, String?) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun ConfigScreen()</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun LogScreen()</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun MainScreen()</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun MenuItemCard( item: MenuItemConfig, onMoveUp: (() -&gt; Unit)?, onMoveDown: (() -&gt; Unit)?, onDelete: () -&gt; Unit, onUpdate: (MenuItemConfig) -&gt; Unit, )</ID>
+    <ID>FunctionNaming:Theme.kt$@Composable @Suppress("ktlint:standard:function-naming") fun AppTheme( darkTheme: Boolean = isSystemInDarkTheme(), // Dynamic color is available on Android 12+ dynamicColor: Boolean = true, content: @Composable () -&gt; Unit, )</ID>
+    <ID>LongMethod:HookEntry.kt$HookEntry$fun customizeMenu( menu: Menu, context: Context?, prefs: YukiHookPrefsBridge, )</ID>
+    <ID>LongMethod:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun AddItemDialog( onDismiss: () -&gt; Unit, onAdd: (String, String, Boolean, String?) -&gt; Unit, )</ID>
+    <ID>LongMethod:MainActivity.kt$@Composable @Suppress("ktlint:standard:function-naming") fun ConfigScreen()</ID>
+    <ID>MaxLineLength:HookEntry.kt$HookEntry$// to inject unwanted menu items like "AI Writer", "Translate", or "Search" that clutter the menu.</ID>
+    <ID>SwallowedException:ConfigRepository.kt$ConfigRepository$e: Exception</ID>
+    <ID>SwallowedException:HookEntry.kt$HookEntry$e: Exception</ID>
+    <ID>SwallowedException:HookEntry.kt$HookEntry$e: Throwable</ID>
+    <ID>SwallowedException:HookEntry.kt$HookEntry.MenuItemData.Companion$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:ConfigRepository.kt$ConfigRepository$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:HookEntry.kt$HookEntry$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:HookEntry.kt$HookEntry$e: Throwable</ID>
+    <ID>TooGenericExceptionCaught:HookEntry.kt$HookEntry.MenuItemData.Companion$e: Exception</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Edge Menu Customizer</string>
+    <string name="app_description">Customize Microsoft Edge text selection context menu</string>
+</resources>

@@ -1,0 +1,37 @@
+[tools]
+android-sdk = "1.0"
+gradle = "9.2.1"
+java = "21.0.2"
+kotlin = "2.3.0"
+
+[env]
+# Load .env file automatically
+_.file = ".env"
+
+[tasks.build]
+description = "Build the debug APK"
+run = "./gradlew assembleDebug"
+
+[tasks.release]
+description = "Build the release APK (unsigned)"
+run = "./gradlew assembleRelease"
+
+[tasks.lint]
+description = "Run static analysis (Detekt)"
+run = "./gradlew detekt"
+
+[tasks.fmt]
+description = "Format code (Spotless/Ktlint)"
+run = "./gradlew spotlessApply"
+
+[tasks.check]
+description = "Run all checks (Formatting check + Detekt)"
+run = "./gradlew spotlessCheck detekt"
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = "./gradlew clean"
+
+[tasks.publish]
+description = "Bump version, tag, and push to trigger release (Usage: mise run publish 1.0.1)"
+run = "./scripts/publish.sh"

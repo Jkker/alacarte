@@ -1,0 +1,7 @@
+root = true
+
+[*.{kt,kts}]
+ktlint_standard_function-naming_ignore-when-annotated-with = Composable
+ktlint_standard_no-wildcard-imports_allowed_packages = java.util,javax.persistence,androidx.compose.foundation.layout,androidx.compose.material3,androidx.compose.runtime
+indent_size = 4
+max_line_length = 140
