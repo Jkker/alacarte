@@ -1,41 +1,54 @@
-name: Android Release
+name: Android CI
 
 on:
   push:
+    branches: [main]
     tags:
       - 'v*'
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     permissions:
       contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install tools with mise
-        uses: jdx/mise-action@v3
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
         with:
-          experimental: true
+          java-version: 21
+          distribution: 'temurin'
+          cache: 'gradle'
 
-      - name: Decode Keystore
-        env:
-          SIGNING_KEY_STORE_BASE64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+      - name: Write key
+        if: github.event_name != 'pull_request'
         run: |
-          echo $SIGNING_KEY_STORE_BASE64 | base64 -d > release.keystore
+          if [ ! -z "${{ secrets.SIGNING_KEY_STORE_BASE64 }}" ]; then
+            echo "SIGNING_STORE_PASSWORD=${{ secrets.SIGNING_STORE_PASSWORD }}" >> gradle.properties
+            echo "SIGNING_KEY_ALIAS=${{ secrets.SIGNING_KEY_ALIAS }}" >> gradle.properties
+            echo "SIGNING_KEY_PASSWORD=${{ secrets.SIGNING_KEY_PASSWORD }}" >> gradle.properties
+            echo "SIGNING_KEY_STORE_PATH=key.jks" >> gradle.properties
+            echo ${{ secrets.SIGNING_KEY_STORE_BASE64 }} | base64 --decode > app/key.jks
+          fi
 
-      - name: Build Release APK
-        env:
-          SIGNING_KEY_STORE_PATH: ${{ github.workspace }}/release.keystore
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        run: ./gradlew assembleRelease
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease assembleDebug
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: outputs
+          path: app/build/outputs/apk
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
         with:
           files: app/build/outputs/apk/release/app-release.apk
           generate_release_notes: true
+          fail_on_unmatched_files: true

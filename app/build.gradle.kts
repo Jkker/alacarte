@@ -22,12 +22,12 @@ android {
 
     signingConfigs {
         create("release") {
-            // Load from env vars (CI or local .env)
-            val envPath = System.getenv("SIGNING_KEY_STORE_PATH")
-            storeFile = if (envPath != null) file(envPath) else null
-            storePassword = System.getenv("SIGNING_STORE_PASSWORD")
-            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
-            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            // Load from gradle.properties (set by CI workflow or .env)
+            val storePath = project.findProperty("SIGNING_KEY_STORE_PATH") as String?
+            storeFile = if (storePath != null) file(storePath) else null
+            storePassword = project.findProperty("SIGNING_STORE_PASSWORD") as String?
+            keyAlias = project.findProperty("SIGNING_KEY_ALIAS") as String?
+            keyPassword = project.findProperty("SIGNING_KEY_PASSWORD") as String?
         }
     }
 
